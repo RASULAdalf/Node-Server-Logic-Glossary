@@ -13,7 +13,7 @@ const saveWord = (req,resp)=>{
     })
 };
 const searchWord = async (req, resp) => {
-    if (req.query.fromLang === 'eng') {
+    if (req.query.fromLang === 'English') {
         const foundData = await WordSchema.findOne({englishWord: req.query.word}).collation({ locale: "en", strength: 2 }).exec();
         if (foundData!== null){
             await new HistorySchema({
@@ -25,11 +25,11 @@ const searchWord = async (req, resp) => {
             resp.status(200).json({data: foundData.sinhalaWord})
             });
         }else {
-            resp.status(404).json({data:"Word Not Found!"})
+            resp.json({data:"Word Not Found!"})
         }
 
 
-    }else if (req.query.fromLang === 'sin') {
+    }else if (req.query.fromLang === 'Sinhala') {
         const foundData = await WordSchema.findOne({sinhalaWord: req.query.word}).collation({ locale: "si", strength: 2 }).exec();;
         if (foundData!== null){
             await new HistorySchema({
@@ -41,10 +41,10 @@ const searchWord = async (req, resp) => {
             resp.status(200).json({data: foundData.englishWord})
             });
         }else {
-            resp.status(404).json({data:"Word Not Found!"})
+            resp.json({data:"Word Not Found!"})
         }
     }else {
-        resp.status(404).json({data:"Wrong Input"})
+        resp.json({data:"Wrong Input"})
     }
 
 }

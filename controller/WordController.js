@@ -14,7 +14,7 @@ const saveWord = (req,resp)=>{
 };
 const searchWord = async (req, resp) => {
     if (req.query.fromLang === 'English') {
-        const foundData = await WordSchema.findOne({englishWord: req.query.word}).collation({ locale: "en", strength: 2 }).exec();
+        const foundData = await WordSchema.findOne({englishWord: {$regex: req.query.word, $options: 'i'}}).collation({ locale: "en", strength: 2 }).exec();7
         if (foundData!== null){
             await new HistorySchema({
                 englishWord: foundData.englishWord,
@@ -30,7 +30,7 @@ const searchWord = async (req, resp) => {
 
 
     }else if (req.query.fromLang === 'Sinhala') {
-        const foundData = await WordSchema.findOne({sinhalaWord: req.query.word}).collation({ locale: "si", strength: 2 }).exec();;
+        const foundData = await WordSchema.findOne({sinhalaWord: {$regex: req.query.word, $options: 'i'}}).collation({ locale: "si", strength: 2 }).exec();;
         if (foundData!== null){
             await new HistorySchema({
                 englishWord: foundData.englishWord,

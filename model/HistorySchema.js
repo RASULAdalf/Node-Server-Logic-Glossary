@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const {Model} = require("mongoose");
 const HistorySchema = new mongoose.Schema({
     englishWord:{type:String,required:true},
     sinhalaWord:{type:String,required:true},

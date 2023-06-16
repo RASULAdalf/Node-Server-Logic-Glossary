@@ -7,6 +7,7 @@ const saveHistory = (req,resp)=>{
         date:req.body.date,
         time:req.body.date
     });
+
     historyData.save().then(result=>{
         resp.status(201).json({message:"successfully saved!"});
     }).catch(error=>{

@@ -12,6 +12,7 @@ app.use(cors());
 
 const wordRouter = require('./routes/WordRoute');
 const historyRouter = require('./routes/HistoryRoute');
+const voiceRouter = require('./routes/VoiceInputRoute');
 
 mongooseDriver.connect(process.env.MONGO_URL);
 app.listen(port,()=>{
@@ -21,3 +22,4 @@ app.listen(port,()=>{
 
 app.use('/api/v1/word',wordRouter);
 app.use('/api/v1/history',historyRouter);
+app.use('/api/v1/voice',voiceRouter);
